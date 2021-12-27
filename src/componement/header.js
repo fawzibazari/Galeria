@@ -5,6 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Link } from "react-router-dom";
+
+import '../Asset/css/Login.css';
+
 
 function Header() {
 
@@ -23,9 +27,20 @@ function Header() {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            News
+                            <Link to={`/home`} className="link">
+                            <Button color="inherit"> Photos</Button>
+                            </Link>
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 0.1 }}>
+                            <Link className="link" to={`/profile`} >
+                                <Button color="inherit"> Mon compte</Button>
+                            </Link>
+                        </Typography>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
+                            <Link className="link" to={`/login`} >
+                                <Button color="inherit">deconexion</Button>
+                            </Link>
+                        </Typography>
                     </Toolbar>
                 </AppBar>
             </ThemeProvider>

@@ -5,8 +5,39 @@
 } */
 
 
-.Login{
+.login{
     margin-top: 10%;
-
+    /* margin-left: 40%; */
     text-align: center;
+}
+
+.card{
+    margin-right:1%;
+    text-align: center;
+    margin-top:1%;
+
+}
+
+.Cards{
+    margin-top:1%;
+    margin-left:7%;
+
+}
+
+.infoUser{
+    /* margin-left:38%; */
+    margin-top: 5%;
+    text-align: center
+}
+
+.upload{
+    margin-top: 2%;
+    text-align: center
+}
+
+
+
+.link{
+    color: #ffff;
+    text-decoration:none; 
 }
