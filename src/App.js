@@ -8,7 +8,10 @@ import Login from './componement/login'
 import Profile from './componement/profile'
 import Home from './componement/home'
 import Header from './componement/header'
+import Footer from './componement/footer'
 
+
+import './Asset/css/index.css';
 
 
 const darkTheme = createTheme({
@@ -39,7 +42,7 @@ function App() {
 
     return (
 
-      <div className="mugiwara">
+      <div >
         <ThemeProvider theme={darkTheme}>
           <BrowserRouter>
             <Header></Header>
@@ -50,8 +53,11 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/home" element={<Home />} />
             </Routes>
-          </BrowserRouter>,
+
+          </BrowserRouter>
         </ThemeProvider>
+        <Footer></Footer>
+
       </div>
 
     );
