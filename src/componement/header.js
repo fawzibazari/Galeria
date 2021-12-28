@@ -6,11 +6,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link } from "react-router-dom";
-
+import AuthService from "../services/auth.service";
 import '../Asset/css/Login.css';
 
 
 function Header() {
+
+    const logOut = () => {
+        AuthService.logout();
+      };
 
     const darkTheme = createTheme({
         palette: {
@@ -38,7 +42,7 @@ function Header() {
                         </Typography>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
                             <Link className="link" to={`/login`} >
-                                <Button color="inherit">deconexion</Button>
+                                <Button onClick={logOut} color="inherit">deconexion</Button>
                             </Link>
                         </Typography>
                     </Toolbar>

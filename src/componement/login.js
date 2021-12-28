@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
@@ -7,58 +6,58 @@ import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from "react-router-dom";
+// import '../Asset/css/Login.css';
+import AuthService from "../services/auth.service";
 
-import '../Asset/css/Login.css';
 // import "../css/index.css";
 
 
 function Login() {
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleChangeEmail = (event) => {
         setEmail(event.target.value);
     };
-    const handleChangePassword = (event) => {
-        setPassword(event.target.value);
-    };
+    const navigate = useNavigate();
+// i could have done with a function but "la flemme"
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+          await AuthService.login(email, password).then(
+            () => {
+              navigate("/home");
+              window.location.reload();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        } catch (err) {
+          console.log(err);
+        }
 
-    console.log(Email)
-    console.log(Password)
-
-
+    }
     return (
-        <div className="Login">
-
-            <Card className="login" sx={{ maxWidth: 345 }}>
-                <Typography gutterBottom variant="h5" component="div">
-                    S'identifier
-                </Typography>
-                <form>
-                    <div>
-                        <InputLabel htmlFor="component-simple">Email</InputLabel>
-                        <Input id="component-simple" value={Email} onChange={handleChangeEmail} />
-                        <br />
-                        <br />
-                        <InputLabel htmlFor="component-simple">Mot de passe </InputLabel>
-                        <Input id="component-simple" value={Password} onChange={handleChangePassword} />
-                        <br />
-                        <br />
-                    </div>
-                    <div>
-                        <Button
-                            style={{
-                                color: "white",
-                                borderColor: "white",
-                            }}
-                            variant="outlined">se connecter</Button>
-                        <br />
-                        <br />
-                    </div>
-                </form>
-            </Card>
-        </div>
+        <div>
+      <form onSubmit={handleLogin}>
+        <h3>Login</h3>
+        <input
+          type="text"
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Log in</button>
+      </form>
+    </div>
     )
 }
-
-export default Login;
+ export default Login;

@@ -1,13 +1,14 @@
 import React from "react";
-
+import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
+import AuthService from "./services/auth.service";
 
 import Login from './componement/login'
 import Profile from './componement/profile'
 import Home from './componement/home'
 import Header from './componement/header'
+
 
 
 const darkTheme = createTheme({
@@ -19,11 +20,23 @@ const darkTheme = createTheme({
   },
 });
 
-class App extends React.Component {
 
+function App() {
 
+  const [currentUser, setCurrentUser] = useState(undefined);
 
-  render() {
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
+  };
+
     return (
 
       <div className="mugiwara">
@@ -42,7 +55,7 @@ class App extends React.Component {
       </div>
 
     );
-  }
+  
 
 }
 
