@@ -26,12 +26,13 @@ function Profile() {
     const [cofirmedNewpassword, setCofirmedNewpassword] = useState("");
     const [photo, setPhoto] = useState("");
 
+    console.log(photo);
 
 
     const butdisabled = newpassword == cofirmedNewpassword && newpassword.length > 2 && cofirmedNewpassword.length > 2 ? "" : "disabled";
 
 
-    console.log(butdisabled)
+    // console.log(butdisabled)
 
     const handleChangeNewpassword = (event) => {
         setNewpassword(event.target.value);
@@ -90,7 +91,7 @@ function Profile() {
 
             <div className="upload">
                 <form>
-                    <Input value={photo} id="component-simple" type="file" onChange={handleChangePhoto}/> <br />
+                    <Input value={photo} id="component-simple" type="file" onChange={handleChangePhoto} /> <br />
                     <Button  disabled={photo == ""}  >upload la photo </Button>
                 </form>
             </div>
