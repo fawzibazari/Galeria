@@ -38,7 +38,6 @@ function App() {
   };
 
     return (
-
       <div className="mugiwara">
         <ThemeProvider theme={darkTheme}>
           <BrowserRouter>
