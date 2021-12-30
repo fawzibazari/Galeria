@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AuthService from "./services/auth.service";
-
+import { useNavigate } from "react-router-dom";
 import Login from './componement/login'
 import Profile from './componement/profile'
 import Home from './componement/home'

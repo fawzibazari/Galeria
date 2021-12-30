@@ -32,20 +32,6 @@ static async login(email, password) {
  static getCurrentUser(){
     return JSON.parse(localStorage.getItem("user"));
   };
-  static async getAllPhotos(){
-    // return axios.get("http://localhost:4000/photo/"
-
-  await axios({
-    method: 'GET',
-    url: "http://localhost:4000/photo/",
-    headers: {
-      'Authorization': 'Bearer ' + this.response.data.token,
-    }
-
-  },
-  console.log(this.response.data.token)
-  );
-};
   authService() {
     this.authService.register()
   }
