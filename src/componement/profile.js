@@ -10,7 +10,9 @@ import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import PhotoService from "../services/photo.service";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
+
 
 
 const InfoUser =
@@ -23,12 +25,29 @@ const InfoUser =
 
 
 function Profile() {
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        AuthService.getUser().then(
+          (response) => {
+              console.log(response)},
+          (error) => {
+            console.log("T'as pas le droit 😁", error.response);
+            // Invalid token
+            if (error.response && error.response.status === 401) {
+              navigate("/login");
+              window.location.reload();
+            }
+          }
+        );
+      }, []);
 
     const [newpassword, setNewpassword] = useState("");
-    const [cofirmedNewpassword, setCofirmedNewpassword] = useState("");
+    const [cofirmedNewpassword, setCofirmedNewpassword] = useState();
     const [file, setFile] = useState(null)
-    const [description, setDescription] = useState("test");
-    const [tag, setTag] = useState("test");
+    const [description, setDescription] = useState("");
+    const [tag, setTag] = useState("");
 
 
     console.log(file);
@@ -36,9 +55,18 @@ function Profile() {
     const fileHandler = (e) => {
         setFile(e.target.files[0])
     }
+    
+    const DescriptionHandler = (e) => {
+        setDescription(e.target.value)
+    }
+    
+    const TagHandler = (e) => {
+        setTag(e.target.value)
+    }
+
   const upload = async => { 
 
-    PhotoService.uploadPhotos(file,description,tag)
+    PhotoService.uploadPhotos(file,tag,description)
     .then(res => { 
         console.warn(res.data);
     })
@@ -68,21 +96,18 @@ function Profile() {
                     </Typography>
                     <CardContent>
                         <TextField
-                            disabled
                             id="standard-disabled"
                             label="nom"
                             defaultValue={InfoUser[0].lastname}
                             variant="standard"
                         />
-                        <TextField
-                            disabled
+                        <TextField    
                             id="standard-disabled"
                             label="prenom"
                             defaultValue={InfoUser[0].firstname}
                             variant="standard"
                         />
-                        <TextField
-                            disabled
+                        <TextField         
                             id="standard-disabled"
                             label="email"
                             defaultValue={InfoUser[0].email}
@@ -108,6 +133,10 @@ function Profile() {
                 <img src={file? URL.createObjectURL(file) : null} alt={file? file.name : null}/>
                 <br></br>
                 <input type="file" onChange={fileHandler} />
+                <label>Tag</label>
+                <input type="text" onChange={TagHandler} />
+                <label>Description</label>
+                <input type="text" onChange={DescriptionHandler} />
                 <button type="button" onClick={upload}>Upload</button> 
                 </form>
             </div>

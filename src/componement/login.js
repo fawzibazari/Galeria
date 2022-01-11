@@ -41,9 +41,6 @@ function Login() {
 
         setOpen(false);
     };
-    const handleChangeEmail = (event) => {
-        setEmail(event.target.value);
-    };
     const navigate = useNavigate();
     // i could have done with a function but "la flemme"
     const handleLogin = async (e) => {

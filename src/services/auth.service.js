@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "./auth-header";
 import PhotoService from "./photo.service";
 const API_URL = "http://localhost:4000/auth/";
 
@@ -20,11 +21,9 @@ static async login(email, password) {
 
       });
   }
-static async getUserId(user){
-//  await console.log("hello");
-// const userId = this.user
-  // return userId
-}
+  static async getUser(){
+    return axios.get("http://localhost:4000/user", { headers: authHeader()});
+  }
 
   
   static logout() {
