@@ -3,13 +3,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-
-
 import '../Asset/css/Login.css';
 import FormControl from '@mui/material/FormControl';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
+import PhotoService from "../services/photo.service";
+import axios from "axios";
+import AuthService from "../services/auth.service";
+
 
 const InfoUser =
     [{
@@ -24,24 +26,36 @@ function Profile() {
 
     const [newpassword, setNewpassword] = useState("");
     const [cofirmedNewpassword, setCofirmedNewpassword] = useState("");
-    const [photo, setPhoto] = useState("");
+    const [file, setFile] = useState(null)
+    const [description, setDescription] = useState("test");
+    const [tag, setTag] = useState("test");
 
-    console.log(photo);
+
+    console.log(file);
+
+    const fileHandler = (e) => {
+        setFile(e.target.files[0])
+    }
+  const upload = async => { 
+
+    PhotoService.uploadPhotos(file,description,tag)
+    .then(res => { 
+        console.warn(res.data);
+    })
+
+         
+}    
 
 
     const butdisabled = newpassword == cofirmedNewpassword && newpassword.length > 2 && cofirmedNewpassword.length > 2 ? "" : "disabled";
 
 
-    // console.log(butdisabled)
 
     const handleChangeNewpassword = (event) => {
         setNewpassword(event.target.value);
     };
     const handleChangeCofirmedNewpassword = (event) => {
         setCofirmedNewpassword(event.target.value);
-    };
-    const handleChangePhoto = (event) => {
-        setPhoto(event.target.value);
     };
 
     return (
@@ -91,8 +105,10 @@ function Profile() {
 
             <div className="upload">
                 <form>
-                    <Input value={photo} id="component-simple" type="file" onChange={handleChangePhoto} /> <br />
-                    <Button  disabled={photo == ""}  >upload la photo </Button>
+                <img src={file? URL.createObjectURL(file) : null} alt={file? file.name : null}/>
+                <br></br>
+                <input type="file" onChange={fileHandler} />
+                <button type="button" onClick={upload}>Upload</button> 
                 </form>
             </div>
             <div className="upload">
