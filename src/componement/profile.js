@@ -44,6 +44,7 @@ function Profile() {
       }, []);
 
     const [newpassword, setNewpassword] = useState("");
+    const [oldwpassword, setOldpassword] = useState("");
     const [cofirmedNewpassword, setCofirmedNewpassword] = useState();
     const [file, setFile] = useState(null)
     const [description, setDescription] = useState("");
@@ -77,10 +78,11 @@ function Profile() {
 
     const butdisabled = newpassword == cofirmedNewpassword && newpassword.length > 2 && cofirmedNewpassword.length > 2 ? "" : "disabled";
 
-
-
-    const handleChangeNewpassword = (event) => {
+    const handleChangeOldpassword = (event) => {
         setNewpassword(event.target.value);
+    };
+    const handleChangeNewpassword = (event) => {
+        setOldpassword(event.target.value);
     };
     const handleChangeCofirmedNewpassword = (event) => {
         setCofirmedNewpassword(event.target.value);
@@ -113,6 +115,10 @@ function Profile() {
                             defaultValue={InfoUser[0].email}
                             variant="standard"
                         />
+                        <FormControl variant="standard">
+                            <InputLabel htmlFor="component-simple">ancien mot de passe</InputLabel>
+                            <Input id="component-simple" value={oldwpassword} onChange={handleChangeOldpassword} />
+                        </FormControl>
                         <FormControl variant="standard">
                             <InputLabel htmlFor="component-simple">Nouveau mot de passe</InputLabel>
                             <Input id="component-simple" value={newpassword} onChange={handleChangeNewpassword} />
