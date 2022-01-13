@@ -1,0 +1,12 @@
+.footer {
+ background-color: #121212;
+ background-image:  linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09));
+ /* border-top:2px solid red; */
+ position: fixed;
+ width: 100%;
+ bottom: 0;
+ color: white;
+ font-size: 25px;
+
+ text-align: center;
+}

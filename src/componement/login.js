@@ -28,7 +28,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const  vertical ="top"
     const  horizontal = "center"
 
@@ -40,9 +40,6 @@ function Login() {
         }
 
         setOpen(false);
-    };
-    const handleChangeEmail = (event) => {
-        setEmail(event.target.value);
     };
     const navigate = useNavigate();
     // i could have done with a function but "la flemme"

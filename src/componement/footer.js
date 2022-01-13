@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AuthService from "../services/auth.service";
 import '../Asset/css/Login.css';
+import '../Asset/css/footer.css';
 
 
 function Footer() {
@@ -23,14 +24,10 @@ function Footer() {
     });
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <ThemeProvider theme={darkTheme}>
-                <AppBar position="static">
-                    <Toolbar>
-                    </Toolbar>
-                </AppBar>
-            </ThemeProvider>
-        </Box>
+        <footer className="footer">
+        <p>Galeria</p>
+      
+      </footer>
     )
 }
 export default Footer;

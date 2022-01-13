@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import authHeader from "./auth-header";
+import PhotoService from "./photo.service";
 const API_URL = "http://localhost:4000/auth/";
 
 class AuthService {
@@ -8,14 +9,23 @@ static async login(email, password) {
       .post(API_URL + "login", { email, password })
       .then((response) => {
         if (response.data.token) {
-          localStorage.setItem("user", JSON.stringify(response.data.token));
-          console.log('test')
+          localStorage.setItem("user", JSON.stringify(response.data));
+          console.log(response.data.user.id)
         }
+        let user = response.data.user.id;
+        // const user1 = user.userId
+        // this.getUserId()
         return response.data.token;
+
+   
 
       });
   }
+  static async getUser(){
+    return axios.get("http://localhost:4000/user", { headers: authHeader()});
+  }
 
+  
   static logout() {
     localStorage.removeItem("user");
   }
