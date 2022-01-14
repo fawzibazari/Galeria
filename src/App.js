@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, Navigate} from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AuthService from "./services/auth.service";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import Profile from './componement/profile'
 import Home from './componement/home'
 import Header from './componement/header'
 import Footer from './componement/footer'
-
 
 import './Asset/css/index.css';
 
@@ -25,21 +24,6 @@ const darkTheme = createTheme({
 
 
 function App() {
-
-  const [currentUser, setCurrentUser] = useState(undefined);
-
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-  const logOut = () => {
-    AuthService.logout();
-  };
-
     return (
 
       <div >
@@ -48,7 +32,7 @@ function App() {
             <Header></Header>
 
             <Routes>
-              {/* <Route path="/" element={<App />} /> */}
+            <Route path="/" element={<Navigate replace to="/login" />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/home" element={<Home />} />

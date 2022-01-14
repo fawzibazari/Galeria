@@ -25,8 +25,8 @@ const InfoUser =
 
 
 function Profile() {
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         AuthService.getUser().then(
@@ -65,21 +65,8 @@ function Profile() {
     PhotoService.uploadPhotos(file,tag,description)
     .then(res => { 
         console.warn(res.data);
-    })
-
-
-         
+    })   
 }  
-
-
-useEffect((id) => {
-    fetch(`http://localhost:4000/user/${id}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-          console.log(responseJson)
-      });
-    }, []);
-
 
     const butdisabled = newpassword == cofirmedNewpassword && newpassword.length > 2 && cofirmedNewpassword.length > 2 ? "" : "disabled";
 
@@ -93,6 +80,9 @@ useEffect((id) => {
         setCofirmedNewpassword(event.target.value);
     };
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
+
     return (
         <div className="">
             <div className="infoUser">
@@ -105,19 +95,19 @@ useEffect((id) => {
                         <TextField
                             id="standard-disabled"
                             label="nom"
-                            defaultValue={InfoUser[0].lastname}
+                            defaultValue={user.user.lastname}
                             variant="standard"
                         />
                         <TextField    
                             id="standard-disabled"
                             label="prenom"
-                            defaultValue={InfoUser[0].firstname}
+                            defaultValue={user.user.firstname}
                             variant="standard"
                         />
                         <TextField         
                             id="standard-disabled"
                             label="email"
-                            defaultValue={InfoUser[0].email}
+                            defaultValue={user.user.email}
                             variant="standard"
                         />
                         <FormControl variant="standard">
@@ -164,6 +154,7 @@ useEffect((id) => {
    
     )
 }
+
 
 export default Profile;
 
