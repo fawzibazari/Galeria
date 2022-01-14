@@ -10,19 +10,6 @@ import '../Asset/css/footer.css';
 
 function Footer() {
 
-    const logOut = () => {
-        AuthService.logout();
-      };
-
-    const darkTheme = createTheme({
-        palette: {
-            mode: 'dark',
-            primary: {
-                main: '#1976d2',
-            },
-        },
-    });
-
     return (
         <footer className="footer">
         <p>Galeria</p>

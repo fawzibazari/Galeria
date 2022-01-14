@@ -30,8 +30,7 @@ function Profile() {
 
     useEffect(() => {
         AuthService.getUser().then(
-          (response) => {
-              console.log(response)},
+          (response) => {},
           (error) => {
             console.log("T'as pas le droit 😁", error.response);
             // Invalid token
@@ -49,10 +48,6 @@ function Profile() {
     const [file, setFile] = useState(null)
     const [description, setDescription] = useState("");
     const [tag, setTag] = useState("");
-
-
-    console.log(file);
-
     const fileHandler = (e) => {
         setFile(e.target.files[0])
     }
@@ -72,8 +67,18 @@ function Profile() {
         console.warn(res.data);
     })
 
+
          
-}    
+}  
+
+
+useEffect((id) => {
+    fetch(`http://localhost:4000/user/${id}`)
+      .then((response) => response.json())
+      .then((responseJson) => {
+          console.log(responseJson)
+      });
+    }, []);
 
 
     const butdisabled = newpassword == cofirmedNewpassword && newpassword.length > 2 && cofirmedNewpassword.length > 2 ? "" : "disabled";
@@ -148,10 +153,15 @@ function Profile() {
             </div>
             <div className="upload">
                 <h1>Mes photos</h1>
+                {/* //ajouter les photos de l'utilisateurs et rajouter la fonction supprimer la photo */}
 
-                //ajouter les photos de l'utilisateurs et rajouter la fonction supprimer la photo
             </div>
+
+            {/* <h5 class="card-title">{player.name}</h5>
+    <p class="card-text">{player.runs}</p> */}
         </div>
+
+   
     )
 }
 
