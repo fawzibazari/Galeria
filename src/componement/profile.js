@@ -15,15 +15,6 @@ import AuthService from "../services/auth.service";
 
 
 
-const InfoUser =
-    [{
-        firstname: "firstname",
-        lastname: "lastname",
-        email: "email@email.com",
-    }]
-
-
-
 function Profile() {
 
     const navigate = useNavigate();
@@ -48,6 +39,8 @@ function Profile() {
     const [file, setFile] = useState(null)
     const [description, setDescription] = useState("");
     const [tag, setTag] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [firstname, setFirstname] = useState("");
     const fileHandler = (e) => {
         setFile(e.target.files[0])
     }
@@ -59,12 +52,27 @@ function Profile() {
     const TagHandler = (e) => {
         setTag(e.target.value)
     }
+    
+    const firstnameHandler = (e) => {
+        setFirstname(e.target.value)
+    }
+    const lastnameHandler = (e) => {
+        setLastname(e.target.value)
+    }
 
   const upload = async => { 
 
     PhotoService.uploadPhotos(file,tag,description)
     .then(res => { 
         console.warn(res.data);
+    })   
+}  
+  
+const update = (e) =>  { 
+    e.preventDefault();
+    AuthService.update(firstname,lastname)
+    .then(res => { 
+        console.log(res);
     })   
 }  
 
@@ -92,7 +100,7 @@ function Profile() {
                         Mes info
                     </Typography>
                     <CardContent>
-                        <TextField
+                        {/* <TextField
                             id="standard-disabled"
                             label="nom"
                             defaultValue={user.user.lastname}
@@ -107,10 +115,20 @@ function Profile() {
                         <TextField         
                             id="standard-disabled"
                             label="email"
-                            defaultValue={user.user.email}
                             variant="standard"
-                        />
-                        <FormControl variant="standard">
+                        /> */}
+                        <form onSubmit={update} >
+
+                          <FormControl variant="standard">
+                            {/* <InputLabel htmlFor="component-simple">ancien mot de passe</InputLabel> */}
+                            <Input id="component-simple" defaultValue={user.user.firstname} onChange={firstnameHandler} />
+                            </FormControl>
+                            <FormControl variant="standard">
+                            <Input id="component-simple" defaultValue={user.user.lastname} onChange={lastnameHandler} />
+                            </FormControl>
+                            <Typography  component="div">{user.user.email}</Typography>
+                      
+                        {/* <FormControl variant="standard">
                             <InputLabel htmlFor="component-simple">ancien mot de passe</InputLabel>
                             <Input id="component-simple" value={oldwpassword} onChange={handleChangeOldpassword} />
                         </FormControl>
@@ -121,10 +139,14 @@ function Profile() {
                         <FormControl variant="standard">
                             <InputLabel htmlFor="component-simple">confirmer le mot de passe</InputLabel>
                             <Input id="component-simple" value={cofirmedNewpassword} onChange={handleChangeCofirmedNewpassword} />
-                        </FormControl>
+                        </FormControl> */}
                         <br />
                         <br />
-                        <Button disabled={butdisabled} >Update mot de passe </Button>
+                        <Button 
+                        type="submit"
+                        //  disabled={butdisabled} 
+                         >Update votre profle </Button>
+                         </form>
                     </CardContent>
                 </Card>
             </div>
