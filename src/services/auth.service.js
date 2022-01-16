@@ -41,7 +41,11 @@ static async login(email, password) {
     return axios.patch(`http://localhost:4000/user/${id}`, {
       firstname,
       lastname,
-    },{ headers: authHeader()});
+    },{ headers: authHeader()})
+    // .then((response) => {
+    
+    //   return ;
+    // });
   }
 
  static getCurrentUser(){

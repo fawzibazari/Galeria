@@ -72,7 +72,9 @@ const update = (e) =>  {
     e.preventDefault();
     AuthService.update(firstname,lastname)
     .then(res => { 
-        console.log(res);
+        localStorage.removeItem("user");
+        navigate("/login");
+        window.location.reload();
     })   
 }  
 
