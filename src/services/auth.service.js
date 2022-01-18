@@ -1,6 +1,5 @@
 import axios from "axios";
 import authHeader from "./auth-header";
-import PhotoService from "./photo.service";
 const API_URL = "http://localhost:4000/auth/";
 
 class AuthService {
@@ -10,11 +9,7 @@ static async login(email, password) {
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
-          console.log(response.data.user.id)
         }
-        let user = response.data.user.id;
-        // const user1 = user.userId
-        // this.getUserId()
         return response.data.token;
 
    
@@ -39,6 +34,20 @@ static async login(email, password) {
       isValid
     });
   }
+  
+  static update(firstname, lastname) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const id = user.user.id
+    return axios.patch(`http://localhost:4000/user/${id}`, {
+      firstname,
+      lastname,
+    },{ headers: authHeader()})
+    // .then((response) => {
+    
+    //   return ;
+    // });
+  }
+
  static getCurrentUser(){
     return JSON.parse(localStorage.getItem("user"));
   };
